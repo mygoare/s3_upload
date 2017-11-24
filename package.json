@@ -1,0 +1,17 @@
+{
+  "name": "s3_upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "s3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "dependencies": {
+    "aws-sdk": "^2.156.0",
+    "busboy": "^0.2.14",
+    "mime-types": "^2.1.17"
+  },
+  "license": "ISC"
+}
