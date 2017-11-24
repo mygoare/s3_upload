@@ -4,5 +4,6 @@
     "region": "ap-northeast-1",
     "bucketName": "xxx",    
     "cloudFront": "xxx",
-    "accessToken": "xxx"    
+    "accessToken": "xxx",
+    "EC2Public": "xxx"    
 }

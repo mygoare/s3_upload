@@ -14,19 +14,24 @@ http.createServer(function(req, res) {
         busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
             s3Upload(file, filename)
             .then(function(data) {
-
-                res.writeHead(200, {'Content-Type': 'application/json'})                ;
-                let obj = {};
-
+                let location = ''
                 if (cdnUrl) {
-                    obj = {
-                        location: data.Location.replace('https://'+config.bucketName+'.s3.ap-northeast-1.amazonaws.com', cdnUrl)
-                    }
+                    location = data.Location.replace('https://'+config.bucketName+'.s3.ap-northeast-1.amazonaws.com', cdnUrl)                    
                 } else {
-                    obj = data
+                    location = data.Location
                 }
 
-                res.end(JSON.stringify(obj), 'utf-8');
+                res.writeHead(200, {'Content-Type': 'application/json'})                ;
+
+                if (req.headers['x-from'] === 'cli') {
+                    res.end(location, 'utf-8')   
+                } else {
+                    let obj = {
+                        location: location
+                    };
+                    
+                    res.end(JSON.stringify(obj), 'utf-8');
+                }
             })
             .catch(function(err) {
                 console.error(err, err.stack)
