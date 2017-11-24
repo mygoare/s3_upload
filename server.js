@@ -20,7 +20,7 @@ http.createServer(function(req, res) {
 
                 if (cdnUrl) {
                     obj = {
-                        location: cdnUrl + '/' + data.key
+                        location: data.Location.replace('https://'+config.bucketName+'.s3.ap-northeast-1.amazonaws.com', cdnUrl)
                     }
                 } else {
                     obj = data
